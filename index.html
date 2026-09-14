@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Segue — Never guess your next track again</title>
+<meta name="description" content="Segue watches your Rekordbox decks live and scores your whole library by key, tempo, energy, and genre, so the next track is always one drag away.">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#100e1c;
+    --surface:#171426;
+    --surface-2:#1d1930;
+    --surface-3:#251f3c;
+    --border:#332c4d;
+    --text:#f1eefa;
+    --text-muted:#9c94b8;
+    --text-faint:#655c82;
+    --grad-1:#7fe6ec;
+    --grad-2:#93a9f2;
+    --grad-3:#ea94d7;
+    --accent:#9db2f4;
+    --accent-ink:#12101f;
+    --good:#68e0b3;
+    --gradient: linear-gradient(95deg, var(--grad-1) 0%, var(--grad-2) 52%, var(--grad-3) 100%);
+    --font-display:'Sora', 'Arial', sans-serif;
+    --font-body:'Plus Jakarta Sans', -apple-system, 'Segoe UI', sans-serif;
+    --font-mono:'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{background:var(--bg);}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;}
+  [hidden]{display:none!important;}
+  a{color:inherit;}
+  ::selection{background:var(--grad-2); color:var(--accent-ink);}
+
+  h1,h2,h3{
+    font-family:var(--font-display);
+    font-weight:700;
+    line-height:1.08;
+    letter-spacing:-0.015em;
+    text-wrap:balance;
+    margin:0;
+  }
+
+  .mono{font-family:var(--font-mono);}
+  .grad-text{
+    background:var(--gradient);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+
+  .wrap{max-width:1060px; margin:0 auto; padding:0 28px;}
+
+  /* ---------- nav ---------- */
+  header.site{
+    border-bottom:1px solid var(--border);
+    position:sticky; top:0; z-index:20;
+    background:color-mix(in srgb, var(--bg) 86%, transparent);
+    backdrop-filter:blur(10px);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; gap:20px; padding:16px 28px; max-width:1060px; margin:0 auto;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:700; font-size:18px;}
+  .brand img{width:30px; height:30px; display:block;}
+  .nav-links{display:flex; align-items:center; gap:26px; font-size:14px; color:var(--text-muted); margin-left:auto;}
+  .nav-links a{text-decoration:none;}
+  .nav-links a:hover{color:var(--text);}
+  .nav-right{display:flex; align-items:center; gap:14px;}
+
+  .lang-toggle{
+    display:flex; border:1px solid var(--border); border-radius:20px; padding:3px;
+    font-family:var(--font-mono); font-size:11.5px; font-weight:600;
+  }
+  .lang-toggle button{
+    appearance:none; border:none; background:transparent; color:var(--text-faint);
+    padding:5px 11px; border-radius:16px; cursor:pointer; font:inherit; letter-spacing:.03em;
+  }
+  .lang-toggle button.active{background:var(--surface-3); color:var(--text);}
+  .lang-toggle button:focus-visible{outline:2px solid var(--grad-2); outline-offset:1px;}
+
+  .nav-cta{
+    font-family:var(--font-body); font-weight:700; font-size:13.5px;
+    color:var(--accent-ink); background:var(--gradient);
+    padding:9px 17px; border-radius:8px; text-decoration:none; white-space:nowrap;
+  }
+  .nav-cta:hover{filter:brightness(1.07);}
+
+  /* ---------- hero ---------- */
+  .hero{padding:80px 0 64px; position:relative; overflow:hidden;}
+  .hero::before{
+    content:""; position:absolute; top:-220px; left:50%; width:900px; height:640px;
+    background:radial-gradient(closest-side, color-mix(in srgb, var(--grad-2) 16%, transparent), transparent 70%);
+    transform:translateX(-50%); pointer-events:none;
+  }
+  .hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center; position:relative;}
+  .eyebrow{
+    font-family:var(--font-mono); font-size:12px; font-weight:600;
+    letter-spacing:0.14em; text-transform:uppercase; color:var(--grad-2);
+    display:flex; align-items:center; gap:10px; margin-bottom:18px;
+  }
+  .eyebrow::before{content:""; width:16px; height:1px; background:var(--gradient);}
+  h1.headline{font-size:clamp(34px, 4.4vw, 52px); margin-bottom:20px;}
+  .sub{font-size:17px; color:var(--text-muted); max-width:46ch; margin-bottom:32px;}
+  .hero-ctas{display:flex; align-items:center; gap:20px; flex-wrap:wrap; margin-bottom:22px;}
+  .btn-primary{
+    font-family:var(--font-body); font-weight:700; font-size:15px;
+    background:var(--gradient); color:var(--accent-ink);
+    padding:14px 24px; border-radius:9px; text-decoration:none;
+    display:inline-flex; align-items:center; gap:8px; border:none; cursor:pointer;
+  }
+  .btn-primary:hover{filter:brightness(1.06);}
+  .btn-ghost{
+    font-family:var(--font-body); font-weight:600; font-size:14.5px;
+    color:var(--text); text-decoration:none; padding:13px 4px; border-bottom:1px solid var(--border);
+  }
+  .btn-ghost:hover{border-color:var(--text-muted);}
+  .fine-print{font-family:var(--font-mono); font-size:12.5px; color:var(--text-faint); display:flex; gap:16px; flex-wrap:wrap;}
+  .fine-print span{display:flex; align-items:center; gap:7px;}
+  .fine-print .dot{width:5px; height:5px; border-radius:50%; background:var(--good);}
+
+  /* ---------- wheel ---------- */
+  .wheel-card{
+    background:radial-gradient(120% 120% at 30% 15%, var(--surface-2), var(--surface) 60%);
+    border:1px solid var(--border); border-radius:20px; padding:26px; position:relative;
+  }
+  .wheel-card svg{display:block; width:100%; height:auto;}
+  .wheel-caption{
+    display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:8px;
+    margin-top:14px; padding-top:14px; border-top:1px solid var(--border);
+    font-family:var(--font-mono); font-size:12px; color:var(--text-faint);
+  }
+  .wheel-caption b{color:var(--text); font-weight:600;}
+
+  /* ---------- sections ---------- */
+  section{padding:64px 0;}
+  section.divide{border-top:1px solid var(--border);}
+  .section-head{max-width:640px; margin-bottom:44px;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{font-size:clamp(26px, 3.1vw, 33px); margin-bottom:14px;}
+  .section-head p{color:var(--text-muted); font-size:15.5px; max-width:56ch;}
+
+  .steps{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:1px;
+    background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden;
+  }
+  .step{background:var(--surface); padding:30px 26px;}
+  .step .n{font-family:var(--font-mono); font-size:11.5px; color:var(--grad-2); letter-spacing:.08em; margin-bottom:16px; display:block;}
+  .step h3{font-family:var(--font-body); font-size:17px; font-weight:700; margin-bottom:10px;}
+  .step p{color:var(--text-muted); font-size:14.5px; margin:0;}
+
+  /* ---------- demo ---------- */
+  .demo-shell{border:1px solid var(--border); border-radius:16px; overflow:hidden; background:var(--surface);}
+  .demo-titlebar{display:flex; align-items:center; justify-content:space-between; padding:11px 18px; background:var(--surface-2); border-bottom:1px solid var(--border);}
+  .demo-titlebar .dots{display:flex; gap:6px;}
+  .demo-titlebar .dots span{width:9px; height:9px; border-radius:50%; background:var(--surface-3);}
+  .demo-titlebar .label{font-family:var(--font-mono); font-size:11.5px; color:var(--text-faint); letter-spacing:.04em;}
+
+  .deck-row{display:grid; grid-template-columns:1fr; border-bottom:1px solid var(--border);}
+  .deck{padding:16px 18px; display:flex; gap:13px; align-items:flex-start;}
+  .deck .art{width:42px; height:42px; border-radius:8px; flex:none; background:var(--gradient);}
+  .deck .meta{min-width:0;}
+  .deck .deck-label{font-family:var(--font-mono); font-size:11px; color:var(--good); letter-spacing:.06em; margin-bottom:5px; display:block;}
+  .deck .title{font-weight:700; font-size:14.5px; margin-bottom:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .deck .artist{color:var(--text-muted); font-size:13px; margin-bottom:8px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .badges{display:flex; flex-wrap:wrap; gap:6px 12px; font-family:var(--font-mono); font-size:11.5px; color:var(--text-faint);}
+  .badges b{color:var(--text-muted); font-weight:600;}
+
+  .list-toolbar{display:flex; align-items:center; justify-content:space-between; padding:12px 18px; border-bottom:1px solid var(--border); font-family:var(--font-mono); font-size:11.5px; color:var(--text-faint);}
+  .track{display:grid; grid-template-columns:1fr auto; align-items:center; gap:14px; padding:13px 18px; border-bottom:1px solid var(--border);}
+  .track:last-child{border-bottom:none;}
+  .track .title{font-weight:700; font-size:14px; margin-bottom:2px;}
+  .track .artist{color:var(--text-muted); font-size:12.5px; margin-bottom:6px;}
+  .track .badges{font-size:11px;}
+  .match{
+    font-family:var(--font-mono); font-weight:700; font-size:12.5px; color:var(--good);
+    background:color-mix(in srgb, var(--good) 14%, transparent);
+    border:1px solid color-mix(in srgb, var(--good) 34%, transparent);
+    padding:5px 10px; border-radius:20px; white-space:nowrap;
+  }
+  .demo-note{padding:12px 18px; font-family:var(--font-mono); font-size:11px; color:var(--text-faint); background:var(--surface-2); border-top:1px solid var(--border);}
+
+  @media (min-width: 720px){
+    .deck-row{grid-template-columns:1fr 1fr;}
+    .deck:first-child{border-right:1px solid var(--border);}
+  }
+
+  /* ---------- pricing ---------- */
+  .price-card{
+    border:1px solid var(--border); border-radius:18px; padding:36px; background:var(--surface);
+    display:grid; grid-template-columns:1.1fr 1fr; gap:40px; align-items:center;
+  }
+  .price-left .kicker{font-family:var(--font-mono); font-size:12px; color:var(--grad-2); letter-spacing:.1em; text-transform:uppercase; margin-bottom:10px;}
+  .price-left h3{font-size:23px; margin-bottom:12px;}
+  .price-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px;}
+  .price-list li{display:flex; gap:10px; align-items:flex-start; font-size:14.5px; color:var(--text);}
+  .price-list li::before{content:"›"; color:var(--grad-2); font-weight:700; font-family:var(--font-mono);}
+  .price-right{border-left:1px solid var(--border); padding-left:40px; display:flex; flex-direction:column; align-items:flex-start; gap:16px;}
+  .price-tag{font-family:var(--font-mono); font-size:13px; color:var(--text-faint);}
+  .price-tag b{font-family:var(--font-display); font-size:28px; color:var(--text); display:block; margin-top:4px; font-weight:700;}
+
+  @media (max-width: 760px){
+    .price-card{grid-template-columns:1fr;}
+    .price-right{border-left:none; border-top:1px solid var(--border); padding-left:0; padding-top:24px;}
+  }
+
+  /* ---------- faq ---------- */
+  .faq{display:flex; flex-direction:column; border-top:1px solid var(--border);}
+  .faq-item{border-bottom:1px solid var(--border); padding:22px 0;}
+  .faq-item h3{font-family:var(--font-body); font-size:15.5px; font-weight:700; margin-bottom:8px;}
+  .faq-item p{color:var(--text-muted); font-size:14.5px; margin:0; max-width:62ch;}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--border); padding:36px 0 48px;}
+  .foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
+  .foot-row .brand{font-size:14px;}
+  .foot-row .brand img{width:22px; height:22px;}
+  .foot-links{display:flex; gap:22px; font-size:13px; color:var(--text-muted);}
+  .foot-links a{text-decoration:none;}
+  .foot-links a:hover{color:var(--text);}
+  .foot-copy{font-family:var(--font-mono); font-size:11.5px; color:var(--text-faint); margin-top:20px;}
+
+  @media (max-width: 900px){
+    .hero-grid{grid-template-columns:1fr; gap:40px;}
+    .hero{padding:48px 0 44px;}
+    .steps{grid-template-columns:1fr;}
+    .nav-links{display:none;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav">
+    <div class="brand"><img src="assets/logo.png" alt="Segue"> Segue</div>
+    <nav class="nav-links">
+      <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#demo" data-i18n="nav.see">See it</a>
+      <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="tr">TR</button>
+      </div>
+      <a class="nav-cta" href="#pricing" data-i18n="nav.cta">Get Segue</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow" data-i18n="hero.eyebrow">For Rekordbox DJs</div>
+        <h1 class="headline" data-i18n-html="hero.h1">Never guess your <span class="grad-text">next track</span> again.</h1>
+        <p class="sub" data-i18n="hero.sub">Segue sits beside Rekordbox and watches your decks live. The moment a track loads, it scores your entire library by key, tempo, energy, and genre — so the next move is always one drag away.</p>
+        <div class="hero-ctas">
+          <a class="btn-primary" href="https://melodist06382.gumroad.com/l/fhwoz" target="_blank" rel="noopener">
+            <span data-i18n="hero.cta_primary">Get Segue</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="btn-ghost" href="#demo" data-i18n="hero.cta_secondary">See how it reads a mix →</a>
+        </div>
+        <div class="fine-print">
+          <span><i class="dot"></i><span data-i18n="hero.fp1">7-day free trial</span></span>
+          <span><i class="dot"></i><span data-i18n="hero.fp2">One-time purchase</span></span>
+          <span><i class="dot"></i><span data-i18n="hero.fp3">macOS 13+</span></span>
+        </div>
+      </div>
+
+      <div class="wheel-card">
+        <svg id="wheel" viewBox="0 0 380 380" role="img" aria-label="Harmonic key wheel, showing key 8A highlighted with its compatible neighbors"></svg>
+        <div class="wheel-caption">
+          <span><span data-i18n="wheel.now">Now playing</span> <b class="mono">8A</b> · <span class="mono">124</span> bpm</span>
+          <span><span data-i18n="wheel.compat">Compatible</span>: <b class="mono">7A · 9A · 8B</b></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="divide" id="how">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="how.eyebrow">How it works</div>
+        <h2 data-i18n="how.h2">Three things happen while you mix.</h2>
+        <p data-i18n="how.p">No plugin inside Rekordbox, no exported playlists to babysit. Segue runs alongside your set and does the boring part of crate-digging for you.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <span class="n mono" data-i18n="how.step1_n">01 / READS YOUR DECKS</span>
+          <h3 data-i18n="how.step1_h">It watches what's loaded.</h3>
+          <p data-i18n="how.step1_p">Segue reads Rekordbox's on-screen deck info the instant a track loads or changes — no reconfiguring your setup, no extra window to manage mid-set.</p>
+        </div>
+        <div class="step">
+          <span class="n mono" data-i18n="how.step2_n">02 / SCORES YOUR LIBRARY</span>
+          <h3 data-i18n="how.step2_h">Every track gets ranked, live.</h3>
+          <p data-i18n="how.step2_p">Harmonic key compatibility, BPM proximity, energy curve, and genre match are recalculated the moment your current track changes.</p>
+        </div>
+        <div class="step">
+          <span class="n mono" data-i18n="how.step3_n">03 / YOU DRAG, IT LOADS</span>
+          <h3 data-i18n="how.step3_h">Straight onto the deck.</h3>
+          <p data-i18n="how.step3_p">Pull the top match onto an empty deck like any other file. No alt-tabbing, no scrolling a 10,000-track crate under low light.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="divide" id="demo">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="demo.eyebrow">What you'll see</div>
+        <h2 data-i18n="demo.h2">Built to sit next to Rekordbox, not replace it.</h2>
+        <p data-i18n="demo.p">A small panel, always on top, always current. This is what it looks like mid-set — example library shown below.</p>
+      </div>
+
+      <div class="demo-shell">
+        <div class="demo-titlebar">
+          <div class="dots"><span></span><span></span><span></span></div>
+          <div class="label">SEGUE — REKORDBOX ASSISTANT</div>
+        </div>
+        <div class="demo-body">
+          <div class="deck-row">
+            <div class="deck">
+              <div class="art"></div>
+              <div class="meta">
+                <span class="deck-label mono"><span data-i18n="demo.deck1">DECK 1 · PLAYING</span></span>
+                <div class="title">Afterglow (Original Mix)</div>
+                <div class="artist">Jonas Vell</div>
+                <div class="badges"><span><b>124.00</b></span><span><b>8A</b></span><span>Melodic House &amp; Techno</span><span><b>E7</b></span><span>2023</span></div>
+              </div>
+            </div>
+            <div class="deck">
+              <div class="art" style="background:linear-gradient(135deg,#332c4d,#1d1930);"></div>
+              <div class="meta">
+                <span class="deck-label mono" style="color:var(--text-faint);"><span data-i18n="demo.deck2">DECK 2 · EMPTY</span></span>
+                <div class="title" style="color:var(--text-faint);" data-i18n="demo.deck2_empty">No track loaded</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="list-toolbar">
+            <span data-i18n="demo.toolbar_left">RECOMMENDED NEXT</span>
+            <span data-i18n="demo.toolbar_right">SORTED BY MATCH</span>
+          </div>
+
+          <div class="track">
+            <div>
+              <div class="title">Low Tide (Club Mix)</div>
+              <div class="artist">Marlowe &amp; Sonn</div>
+              <div class="badges"><span><b>124.00</b></span><span><b>8A</b></span><span>Melodic House &amp; Techno</span><span><b>E7</b></span><span>2024</span></div>
+            </div>
+            <span class="match">98%</span>
+          </div>
+          <div class="track">
+            <div>
+              <div class="title">Ember Fields</div>
+              <div class="artist">Reya Solis</div>
+              <div class="badges"><span><b>124.00</b></span><span><b>8A</b></span><span>Afro House</span><span><b>E7</b></span><span>2022</span></div>
+            </div>
+            <span class="match">96%</span>
+          </div>
+          <div class="track">
+            <div>
+              <div class="title">Second Skin (Extended)</div>
+              <div class="artist">Halvorsen</div>
+              <div class="badges"><span><b>125.00</b></span><span><b>7A</b></span><span>Melodic House &amp; Techno</span><span><b>E6</b></span><span>2025</span></div>
+            </div>
+            <span class="match">93%</span>
+          </div>
+          <div class="track">
+            <div>
+              <div class="title">Night Signal</div>
+              <div class="artist">Costa &amp; Vey</div>
+              <div class="badges"><span><b>123.00</b></span><span><b>9A</b></span><span>Deep House</span><span><b>E6</b></span><span>2023</span></div>
+            </div>
+            <span class="match">90%</span>
+          </div>
+          <div class="demo-note" data-i18n="demo.note">Example library — Segue ranks against your own collection, not this one.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="divide" id="pricing">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="pricing.eyebrow">Pricing</div>
+        <h2 data-i18n="pricing.h2">One license. One Mac. Yours to keep.</h2>
+      </div>
+
+      <div class="price-card">
+        <div class="price-left">
+          <div class="kicker" data-i18n="pricing.kicker">No subscription</div>
+          <h3 data-i18n="pricing.h3">Buy it once, use it every gig.</h3>
+          <ul class="price-list">
+            <li data-i18n="pricing.li1">7-day free trial, no card required</li>
+            <li data-i18n="pricing.li2">Locked to one Mac — deactivate anytime to move it to a new one</li>
+            <li data-i18n="pricing.li3">Reads a standard Rekordbox collection export, nothing proprietary</li>
+            <li data-i18n="pricing.li4">macOS 13 (Ventura) or later, Apple Silicon &amp; Intel</li>
+          </ul>
+        </div>
+        <div class="price-right">
+          <div class="price-tag"><span data-i18n="pricing.tag">One-time purchase</span><b data-i18n="pricing.tag_b">Get Segue</b></div>
+          <a class="btn-primary" href="https://melodist06382.gumroad.com/l/fhwoz" target="_blank" rel="noopener">
+            <span data-i18n="pricing.buy">Buy on Gumroad</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <div class="fine-print"><span><i class="dot"></i><span data-i18n="pricing.secure">Secure checkout via Gumroad</span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="divide" id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="faq.eyebrow">Fine print</div>
+        <h2 data-i18n="faq.h2">Before you install it</h2>
+      </div>
+      <div class="faq">
+        <div class="faq-item">
+          <h3 data-i18n="faq.q1">Does Segue need special permissions?</h3>
+          <p data-i18n="faq.a1">Yes — macOS Accessibility access, so it can read Rekordbox's on-screen deck state. Segue never modifies Rekordbox itself, and it can't see anything outside Rekordbox's window.</p>
+        </div>
+        <div class="faq-item">
+          <h3 data-i18n="faq.q2">What do I need to get started?</h3>
+          <p data-i18n="faq.a2">Export your Rekordbox collection as XML (File → Export Collection in rekordbox), then point Segue at that file once. It stays loaded after that.</p>
+        </div>
+        <div class="faq-item">
+          <h3 data-i18n="faq.q3">Can I move my license to a new Mac?</h3>
+          <p data-i18n="faq.a3">Yes. Deactivate it from the old machine under Segue's Help menu, then activate the same key on the new one — no need to contact support for a routine switch.</p>
+        </div>
+        <div class="faq-item">
+          <h3 data-i18n="faq.q4">What if it's not for me?</h3>
+          <p data-i18n="faq.a4">Try it free for 7 days first. If you've already bought it, reach out within your first week and we'll sort out a refund.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div class="brand"><img src="assets/logo.png" alt="Segue"> Segue</div>
+      <div class="foot-links">
+        <a href="#how" data-i18n="nav.how">How it works</a>
+        <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+        <a href="#faq" data-i18n="nav.faq">FAQ</a>
+        <a href="mailto:support@usesegue.com" data-i18n="footer.support">Support</a>
+      </div>
+    </div>
+    <div class="foot-copy" data-i18n="footer.copy">© 2026 Ahmet Canbaz. Segue is an independent tool and isn't affiliated with or endorsed by AlphaTheta / Rekordbox.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var svg = document.getElementById('wheel');
+  var ns = 'http://www.w3.org/2000/svg';
+  var cx = 190, cy = 190;
+  var outerR1 = 178, outerR2 = 128;
+  var innerR1 = 124, innerR2 = 76;
+  var n = 12;
+  var highlightNum = 8;
+  var accentHues = [188, 224, 320]; // teal, periwinkle, pink — sampled from the app icon
+
+  function polar(r, deg){
+    var rad = (deg - 90) * Math.PI / 180;
+    return [cx + r * Math.cos(rad), cy + r * Math.sin(rad)];
+  }
+  function ringSegmentPath(rOuter, rInner, startDeg, endDeg){
+    var p1 = polar(rOuter, startDeg), p2 = polar(rOuter, endDeg);
+    var p3 = polar(rInner, endDeg), p4 = polar(rInner, startDeg);
+    var large = (endDeg - startDeg) > 180 ? 1 : 0;
+    return ['M', p1[0], p1[1], 'A', rOuter, rOuter, 0, large, 1, p2[0], p2[1],
+      'L', p3[0], p3[1], 'A', rInner, rInner, 0, large, 0, p4[0], p4[1], 'Z'].join(' ');
+  }
+  function isCompatible(num, letter){
+    if (num === highlightNum && letter === 'B') return true;
+    if (letter === 'A' && (num === highlightNum - 1 || num === highlightNum + 1)) return true;
+    return false;
+  }
+
+  var frag = document.createDocumentFragment();
+  for (var i = 0; i < n; i++){
+    var num = i + 1;
+    var startDeg = i * 30, endDeg = startDeg + 30;
+    var hue = i * 30;
+
+    [{letter:'B', r1: outerR1, r2: outerR2, light: 44},
+     {letter:'A', r1: innerR1, r2: innerR2, light: 33}].forEach(function(ring){
+      var isCurrent = (num === highlightNum && ring.letter === 'A');
+      var compat = isCompatible(num, ring.letter);
+      var path = document.createElementNS(ns, 'path');
+      var fill = 'hsl(' + hue + ', 42%, ' + ring.light + '%)';
+      if (isCurrent) fill = 'linear-gradient(90deg,#7fe6ec,#ea94d7)';
+      path.setAttribute('d', ringSegmentPath(ring.r1, ring.r2, startDeg, endDeg));
+      if (isCurrent){
+        path.setAttribute('fill', 'url(#segueGrad)');
+      } else {
+        path.setAttribute('fill', fill);
+      }
+      path.setAttribute('stroke', '#100e1c');
+      path.setAttribute('stroke-width', isCurrent ? 2.5 : 1.5);
+      if (isCurrent) path.setAttribute('stroke', '#f1eefa');
+      else if (compat) path.setAttribute('stroke', '#93a9f2');
+      path.setAttribute('opacity', isCurrent || compat ? '1' : '0.5');
+      frag.appendChild(path);
+
+      var mid = startDeg + 15;
+      var labelR = (ring.r1 + ring.r2) / 2;
+      var pos = polar(labelR, mid);
+      var text = document.createElementNS(ns, 'text');
+      text.setAttribute('x', pos[0]); text.setAttribute('y', pos[1]);
+      text.setAttribute('text-anchor', 'middle'); text.setAttribute('dominant-baseline', 'middle');
+      text.setAttribute('font-family', "'IBM Plex Mono', monospace");
+      text.setAttribute('font-size', '11.5');
+      text.setAttribute('font-weight', isCurrent ? '700' : '500');
+      text.setAttribute('fill', isCurrent ? '#12101f' : 'rgba(16,14,28,0.68)');
+      text.textContent = num + ring.letter;
+      frag.appendChild(text);
+    });
+  }
+
+  var defs = document.createElementNS(ns, 'defs');
+  var grad = document.createElementNS(ns, 'linearGradient');
+  grad.setAttribute('id', 'segueGrad'); grad.setAttribute('x1', '0%'); grad.setAttribute('x2', '100%');
+  [['0%','#7fe6ec'],['55%','#93a9f2'],['100%','#ea94d7']].forEach(function(s){
+    var stop = document.createElementNS(ns, 'stop');
+    stop.setAttribute('offset', s[0]); stop.setAttribute('stop-color', s[1]);
+    grad.appendChild(stop);
+  });
+  defs.appendChild(grad);
+  svg.appendChild(defs);
+  svg.appendChild(frag);
+
+  var center = document.createElementNS(ns, 'circle');
+  center.setAttribute('cx', cx); center.setAttribute('cy', cy); center.setAttribute('r', 74);
+  center.setAttribute('fill', '#171426'); center.setAttribute('stroke', '#332c4d');
+  svg.appendChild(center);
+
+  var t1 = document.createElementNS(ns, 'text');
+  t1.setAttribute('x', cx); t1.setAttribute('y', cy - 6); t1.setAttribute('text-anchor', 'middle');
+  t1.setAttribute('font-family', "'Sora', sans-serif"); t1.setAttribute('font-size', '22'); t1.setAttribute('font-weight', '700');
+  t1.setAttribute('fill', '#f1eefa'); t1.textContent = '8A';
+  svg.appendChild(t1);
+
+  var t2 = document.createElementNS(ns, 'text');
+  t2.setAttribute('x', cx); t2.setAttribute('y', cy + 16); t2.setAttribute('text-anchor', 'middle');
+  t2.setAttribute('font-family', "'IBM Plex Mono', monospace"); t2.setAttribute('font-size', '11');
+  t2.setAttribute('fill', '#9c94b8'); t2.setAttribute('id', 'wheelDeckLabel'); t2.textContent = 'ON DECK 1';
+  svg.appendChild(t2);
+})();
+</script>
+
+<script>
+(function(){
+  var I18N = {
+    en: {
+      'nav.how':'How it works','nav.see':'See it','nav.pricing':'Pricing','nav.faq':'FAQ','nav.cta':'Get Segue',
+      'hero.eyebrow':'For Rekordbox DJs',
+      'hero.sub':'Segue sits beside Rekordbox and watches your decks live. The moment a track loads, it scores your entire library by key, tempo, energy, and genre — so the next move is always one drag away.',
+      'hero.cta_primary':'Get Segue','hero.cta_secondary':'See how it reads a mix →',
+      'hero.fp1':'7-day free trial','hero.fp2':'One-time purchase','hero.fp3':'macOS 13+',
+      'wheel.now':'Now playing','wheel.compat':'Compatible',
+      'how.eyebrow':'How it works','how.h2':'Three things happen while you mix.',
+      'how.p':'No plugin inside Rekordbox, no exported playlists to babysit. Segue runs alongside your set and does the boring part of crate-digging for you.',
+      'how.step1_n':'01 / READS YOUR DECKS','how.step1_h':"It watches what's loaded.",
+      'how.step1_p':"Segue reads Rekordbox's on-screen deck info the instant a track loads or changes — no reconfiguring your setup, no extra window to manage mid-set.",
+      'how.step2_n':'02 / SCORES YOUR LIBRARY','how.step2_h':'Every track gets ranked, live.',
+      'how.step2_p':'Harmonic key compatibility, BPM proximity, energy curve, and genre match are recalculated the moment your current track changes.',
+      'how.step3_n':'03 / YOU DRAG, IT LOADS','how.step3_h':'Straight onto the deck.',
+      'how.step3_p':'Pull the top match onto an empty deck like any other file. No alt-tabbing, no scrolling a 10,000-track crate under low light.',
+      'demo.eyebrow':"What you'll see",'demo.h2':'Built to sit next to Rekordbox, not replace it.',
+      'demo.p':'A small panel, always on top, always current. This is what it looks like mid-set — example library shown below.',
+      'demo.deck1':'DECK 1 · PLAYING','demo.deck2':'DECK 2 · EMPTY','demo.deck2_empty':'No track loaded',
+      'demo.toolbar_left':'RECOMMENDED NEXT','demo.toolbar_right':'SORTED BY MATCH',
+      'demo.note':"Example library — Segue ranks against your own collection, not this one.",
+      'pricing.eyebrow':'Pricing','pricing.h2':'One license. One Mac. Yours to keep.',
+      'pricing.kicker':'No subscription','pricing.h3':'Buy it once, use it every gig.',
+      'pricing.li1':'7-day free trial, no card required',
+      'pricing.li2':'Locked to one Mac — deactivate anytime to move it to a new one',
+      'pricing.li3':'Reads a standard Rekordbox collection export, nothing proprietary',
+      'pricing.li4':'macOS 13 (Ventura) or later, Apple Silicon &amp; Intel',
+      'pricing.tag':'One-time purchase','pricing.tag_b':'Get Segue','pricing.buy':'Buy on Gumroad',
+      'pricing.secure':'Secure checkout via Gumroad',
+      'faq.eyebrow':'Fine print','faq.h2':'Before you install it',
+      'faq.q1':'Does Segue need special permissions?',
+      'faq.a1':"Yes — macOS Accessibility access, so it can read Rekordbox's on-screen deck state. Segue never modifies Rekordbox itself, and it can't see anything outside Rekordbox's window.",
+      'faq.q2':'What do I need to get started?',
+      'faq.a2':'Export your Rekordbox collection as XML (File → Export Collection in rekordbox), then point Segue at that file once. It stays loaded after that.',
+      'faq.q3':'Can I move my license to a new Mac?',
+      'faq.a3':"Yes. Deactivate it from the old machine under Segue's Help menu, then activate the same key on the new one — no need to contact support for a routine switch.",
+      'faq.q4':"What if it's not for me?",
+      'faq.a4':"Try it free for 7 days first. If you've already bought it, reach out within your first week and we'll sort out a refund.",
+      'footer.support':'Support',
+      'footer.copy':"© 2026 Ahmet Canbaz. Segue is an independent tool and isn't affiliated with or endorsed by AlphaTheta / Rekordbox.",
+      'wheel.deck':'ON DECK 1'
+    },
+    tr: {
+      'nav.how':'Nasıl çalışır','nav.see':'Önizle','nav.pricing':'Fiyat','nav.faq':'SSS','nav.cta':"Segue'yi Al",
+      'hero.eyebrow':"REKORDBOX DJ'LERİ İÇİN",
+      'hero.sub':"Segue, Rekordbox'un yanında oturur ve deck'lerini canlı izler. Bir parça yüklendiği anda, tüm kütüphaneni ton, tempo, enerji ve türe göre puanlar — böylece sıradaki hamle her zaman bir sürükle-bırak uzaklığında.",
+      'hero.cta_primary':"Segue'yi Al",'hero.cta_secondary':"Bir mix'i nasıl okuduğunu gör →",
+      'hero.fp1':'7 günlük ücretsiz deneme','hero.fp2':'Tek seferlik satın alma','hero.fp3':'macOS 13+',
+      'wheel.now':'Şu an çalıyor','wheel.compat':'Uyumlu',
+      'how.eyebrow':'Nasıl çalışır','how.h2':'Mix yaparken üç şey gerçekleşir.',
+      'how.p':"Rekordbox içinde eklenti yok, takip edilmesi gereken dışa aktarılmış çalma listeleri yok. Segue setinin yanında çalışır ve crate karıştırmanın sıkıcı kısmını senin için yapar.",
+      'how.step1_n':"01 / DECK'LERİNİ OKUR",'how.step1_h':'Ne yüklendiğini izler.',
+      'how.step1_p':"Segue, bir parça yüklendiği ya da değiştiği anda Rekordbox'un ekran üzerindeki deck bilgisini okur — kurulumunu yeniden yapılandırmaya gerek yok, set sırasında yönetilecek ekstra bir pencere yok.",
+      'how.step2_n':'02 / KÜTÜPHANENİ PUANLAR','how.step2_h':'Her parça canlı olarak sıralanır.',
+      'how.step2_p':'Harmonik ton uyumu, BPM yakınlığı, enerji eğrisi ve tür eşleşmesi, mevcut parçan değiştiği anda yeniden hesaplanır.',
+      'how.step3_n':'03 / SÜRÜKLERSİN, YÜKLENİR','how.step3_h':"Doğrudan deck'e.",
+      'how.step3_p':"En iyi eşleşmeyi boş bir deck'e diğer herhangi bir dosya gibi sürükle. Alt-tab yok, az ışıkta 10.000 parçalık bir crate'te kaydırma yok.",
+      'demo.eyebrow':'Ne göreceksin','demo.h2':"Rekordbox'un yanında oturmak için tasarlandı, onun yerine geçmek için değil.",
+      'demo.p':'Her zaman üstte, her zaman güncel küçük bir panel. Set ortasında böyle görünür — aşağıda örnek kütüphane gösterilmiştir.',
+      'demo.deck1':'DECK 1 · ÇALIYOR','demo.deck2':'DECK 2 · BOŞ','demo.deck2_empty':'Parça yüklenmedi',
+      'demo.toolbar_left':'SIRADAKİ ÖNERİLER','demo.toolbar_right':'EŞLEŞMEYE GÖRE SIRALI',
+      'demo.note':"Örnek kütüphane — Segue kendi koleksiyonuna göre sıralar, buna göre değil.",
+      'pricing.eyebrow':'Fiyatlandırma','pricing.h2':'Tek lisans. Tek Mac. Senin kalsın.',
+      'pricing.kicker':'Abonelik yok','pricing.h3':'Bir kez satın al, her sette kullan.',
+      'pricing.li1':'7 günlük ücretsiz deneme, kart bilgisi gerekmez',
+      'pricing.li2':'Tek bir Mac’e kilitli — istediğin zaman devre dışı bırakıp yenisine taşı',
+      'pricing.li3':'Standart bir Rekordbox koleksiyon dışa aktarımını okur, özel bir format değil',
+      'pricing.li4':'macOS 13 (Ventura) veya üzeri, Apple Silicon ve Intel',
+      'pricing.tag':'Tek seferlik satın alma','pricing.tag_b':"Segue'yi Al",'pricing.buy':"Gumroad'da Satın Al",
+      'pricing.secure':'Gumroad üzerinden güvenli ödeme',
+      'faq.eyebrow':'İnce ayrıntılar','faq.h2':'Kurmadan önce',
+      'faq.q1':'Segue özel izinler gerektiriyor mu?',
+      'faq.a1':"Evet — macOS Erişilebilirlik (Accessibility) izni, Rekordbox'un ekran üzerindeki deck durumunu okuyabilmesi için. Segue Rekordbox'un kendisini asla değiştirmez ve Rekordbox penceresi dışında hiçbir şey göremez.",
+      'faq.q2':'Başlamak için neye ihtiyacım var?',
+      'faq.a2':"Rekordbox koleksiyonunu XML olarak dışa aktar (rekordbox'ta File → Export Collection), sonra Segue'yi bir kez o dosyaya yönlendir. Sonrasında yüklü kalır.",
+      'faq.q3':'Lisansımı yeni bir Mac’e taşıyabilir miyim?',
+      'faq.a3':"Evet. Segue'nin Help menüsünden eski makinede devre dışı bırak, sonra aynı anahtarı yenisinde etkinleştir — rutin bir geçiş için destekle iletişime geçmene gerek yok.",
+      'faq.q4':'Bana uygun değilse?',
+      'faq.a4':"Önce 7 gün ücretsiz dene. Zaten satın aldıysan, ilk hafta içinde bize ulaş, iade sürecini hallederiz.",
+      'footer.support':'Destek',
+      'footer.copy':"© 2026 Ahmet Canbaz. Segue bağımsız bir araçtır ve AlphaTheta / Rekordbox ile bağlantılı ya da onaylı değildir.",
+      'wheel.deck':'DECK 1’DE'
+    }
+  };
+  var HTML_KEYS = {
+    'hero.h1': {
+      en: 'Never guess your <span class="grad-text">next track</span> again.',
+      tr: '<span class="grad-text">Sıradaki parçanı</span> bir daha asla tahmin etme.'
+    }
+  };
+
+  function apply(lang){
+    var dict = I18N[lang];
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      if (dict[key] != null) el.textContent = dict[key];
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-html');
+      if (HTML_KEYS[key] && HTML_KEYS[key][lang]) el.innerHTML = HTML_KEYS[key][lang];
+    });
+    var wheelDeck = document.getElementById('wheelDeckLabel');
+    if (wheelDeck) wheelDeck.textContent = dict['wheel.deck'];
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang-toggle button').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+    });
+    try { localStorage.setItem('segue-lang', lang); } catch(e){}
+  }
+
+  var initial = 'en';
+  try {
+    var saved = localStorage.getItem('segue-lang');
+    if (saved === 'en' || saved === 'tr') initial = saved;
+  } catch(e){}
+
+  document.querySelectorAll('.lang-toggle button').forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.getAttribute('data-lang')); });
+  });
+
+  apply(initial);
+})();
+</script>
+</body>
+</html>
