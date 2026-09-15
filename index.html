@@ -165,6 +165,32 @@
   .step h3{font-family:var(--font-body); font-size:17px; font-weight:700; margin-bottom:10px;}
   .step p{color:var(--text-muted); font-size:14.5px; margin:0;}
 
+  /* ---------- why / compare ---------- */
+  .compare{
+    display:grid; grid-template-columns:1fr 1fr; gap:1px;
+    background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; margin-bottom:28px;
+  }
+  .compare-col{background:var(--surface); padding:28px 30px;}
+  .compare-col h3{font-family:var(--font-body); font-size:15px; font-weight:700; margin-bottom:18px;}
+  .compare-col.without h3{color:var(--text-muted);}
+  .compare-col ul{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px;}
+  .compare-col li{display:flex; gap:10px; font-size:14px; line-height:1.5;}
+  .compare-col li::before{font-weight:700; font-family:var(--font-mono); flex:none;}
+  .compare-col.without li{color:var(--text-faint);}
+  .compare-col.without li::before{content:"–"; color:var(--text-faint);}
+  .compare-col.with li{color:var(--text);}
+  .compare-col.with li::before{content:"✓"; color:var(--good);}
+
+  .reliability{display:grid; grid-template-columns:repeat(3, 1fr); gap:22px;}
+  .reliability-item{display:flex; gap:12px; align-items:flex-start;}
+  .reliability-item .dot2{flex:none; width:7px; height:7px; border-radius:50%; background:var(--gradient); margin-top:7px;}
+  .reliability-item p{font-size:13.5px; color:var(--text-muted); margin:0; line-height:1.55;}
+
+  @media (max-width: 760px){
+    .compare{grid-template-columns:1fr;}
+    .reliability{grid-template-columns:1fr;}
+  }
+
   /* ---------- demo ---------- */
   .demo-shell{border:1px solid var(--border); border-radius:16px; overflow:hidden; background:var(--surface);}
   .demo-titlebar{display:flex; align-items:center; justify-content:space-between; padding:11px 18px; background:var(--surface-2); border-bottom:1px solid var(--border);}
@@ -350,6 +376,44 @@
         <img src="assets/screenshot.png" alt="Segue showing live recommendations next to rekordbox, ranking a real 10,000+ track library" style="display:block; width:100%; height:auto;">
       </div>
       <div class="demo-note" data-i18n="demo.note" style="margin-top:14px; font-family:var(--font-mono); font-size:12px; color:var(--text-faint);">Real screenshot — Deck 1 and Deck 2 loaded, Segue ranking an actual 10,000+ track library in real time.</div>
+    </div>
+  </section>
+
+  <section class="divide" id="why">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow" data-i18n="why.eyebrow">Why Segue</div>
+        <h2 data-i18n="why.h2">Built for the booth, not the bedroom.</h2>
+        <p data-i18n="why.p">Prep tools assume you know your set before you play it. Real sets don't work that way — so neither does Segue.</p>
+      </div>
+
+      <div class="compare">
+        <div class="compare-col without">
+          <h3 data-i18n="why.without_h">The old way</h3>
+          <ul>
+            <li data-i18n="why.without_li1">Scrolling a 10,000-track crate under low light, mid-transition</li>
+            <li data-i18n="why.without_li2">Pre-building playlists that fall apart the moment the crowd reacts</li>
+            <li data-i18n="why.without_li3">Doing Camelot-wheel math in your head while the current track runs out</li>
+            <li data-i18n="why.without_li4">Second-guessing whether that BPM jump will actually land</li>
+          </ul>
+        </div>
+        <div class="compare-col with">
+          <h3 data-i18n="why.with_h">With Segue</h3>
+          <ul>
+            <li data-i18n="why.with_li1">Your whole library re-ranked the instant a track loads — nothing to scroll</li>
+            <li data-i18n="why.with_li2">Total freedom to read the room — there's no playlist to abandon</li>
+            <li data-i18n="why.with_li3">Key and energy compatibility calculated for you, live</li>
+            <li data-i18n="why.with_li4">Every match already sorted by how well it lands, before you need it</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="eyebrow" style="margin-bottom:18px;" data-i18n="why.reliability_eyebrow">No surprises in the booth</div>
+      <div class="reliability">
+        <div class="reliability-item"><span class="dot2"></span><p data-i18n="why.reliability_li1">Runs natively on your Mac — no lag, no plugin inside rekordbox that could crash your set.</p></div>
+        <div class="reliability-item"><span class="dot2"></span><p data-i18n="why.reliability_li2">Read-only by design — Segue watches rekordbox's screen, it never touches your library or database.</p></div>
+        <div class="reliability-item"><span class="dot2"></span><p data-i18n="why.reliability_li3">Fails safe if the venue wifi drops — license and trial checks never lock you out mid-set.</p></div>
+      </div>
     </div>
   </section>
 
@@ -608,7 +672,22 @@
       'privacy.third_p':"Gumroad handles payment and checkout for your purchase. Supabase hosts the small database that remembers your hardware ID and which license key it's bound to. Neither sees your Rekordbox library.",
       'footer.support':'Support',
       'footer.copy':"© 2026 Ahmet Canbaz. Segue is an independent tool and isn't affiliated with or endorsed by AlphaTheta / Rekordbox.",
-      'wheel.deck':'ON DECK 1'
+      'wheel.deck':'ON DECK 1',
+      'why.eyebrow':'Why Segue','why.h2':'Built for the booth, not the bedroom.',
+      'why.p':"Prep tools assume you know your set before you play it. Real sets don't work that way — so neither does Segue.",
+      'why.without_h':'The old way','why.with_h':'With Segue',
+      'why.without_li1':'Scrolling a 10,000-track crate under low light, mid-transition',
+      'why.without_li2':'Pre-building playlists that fall apart the moment the crowd reacts',
+      'why.without_li3':'Doing Camelot-wheel math in your head while the current track runs out',
+      'why.without_li4':'Second-guessing whether that BPM jump will actually land',
+      'why.with_li1':'Your whole library re-ranked the instant a track loads — nothing to scroll',
+      'why.with_li2':"Total freedom to read the room — there's no playlist to abandon",
+      'why.with_li3':'Key and energy compatibility calculated for you, live',
+      'why.with_li4':'Every match already sorted by how well it lands, before you need it',
+      'why.reliability_eyebrow':'No surprises in the booth',
+      'why.reliability_li1':'Runs natively on your Mac — no lag, no plugin inside rekordbox that could crash your set.',
+      'why.reliability_li2':"Read-only by design — Segue watches rekordbox's screen, it never touches your library or database.",
+      'why.reliability_li3':'Fails safe if the venue wifi drops — license and trial checks never lock you out mid-set.'
     },
     tr: {
       'nav.how':'Nasıl çalışır','nav.see':'Önizle','nav.pricing':'Fiyat','nav.faq':'SSS','nav.cta':"Segue'yi Al",
@@ -660,7 +739,22 @@
       'privacy.third_p':"Satın alma işleminizin ödeme ve ödeme sayfası kısmını Gumroad yürütür. Donanım kimliğinizi ve hangi lisans anahtarına bağlı olduğunu hatırlayan küçük veritabanını Supabase barındırır. İkisi de Rekordbox kütüphanenizi görmez.",
       'footer.support':'Destek',
       'footer.copy':"© 2026 Ahmet Canbaz. Segue bağımsız bir araçtır ve AlphaTheta / Rekordbox ile bağlantılı ya da onaylı değildir.",
-      'wheel.deck':'DECK 1’DE'
+      'wheel.deck':'DECK 1’DE',
+      'why.eyebrow':'Neden Segue','why.h2':'Yatak odası için değil, DJ kabini için tasarlandı.',
+      'why.p':'Hazırlık araçları, seti çalmadan önce ne çalacağını bildiğini varsayar. Gerçek setler öyle işlemez — Segue de öyle çalışmaz.',
+      'why.without_h':'Eski yöntem','why.with_h':'Segue ile',
+      'why.without_li1':"Geçiş ortasında, az ışıkta 10.000 parçalık bir crate'te kaydırmak",
+      'why.without_li2':'Kalabalık tepki verdiği anda dağılan hazır çalma listeleri oluşturmak',
+      'why.without_li3':'Mevcut parça biterken kafanda Camelot çarkı hesabı yapmak',
+      'why.without_li4':'O BPM sıçramasının gerçekten oturup oturmayacağını tahmin etmeye çalışmak',
+      'why.with_li1':'Parça yüklendiği anda tüm kütüphanen yeniden sıralanır — kaydırmaya gerek yok',
+      'why.with_li2':'Ortamı okuma özgürlüğü tamamen sende — terk edilecek bir çalma listesi yok',
+      'why.with_li3':'Ton ve enerji uyumu senin için canlı olarak hesaplanır',
+      'why.with_li4':'Her eşleşme, ihtiyacın olmadan önce ne kadar iyi oturacağına göre sıralanmış olur',
+      'why.reliability_eyebrow':'DJ kabininde sürpriz yok',
+      'why.reliability_li1':"Mac'inde native çalışır — gecikme yok, setini çökertebilecek Rekordbox içi bir eklenti yok.",
+      'why.reliability_li2':"Tasarım gereği salt okunur — Segue Rekordbox'un ekranını izler, kütüphanene ya da veritabanına asla dokunmaz.",
+      'why.reliability_li3':'Mekanın wifi’ı kesilse bile güvenli tarafta kalır — lisans ve deneme kontrolleri seni set ortasında asla kilitlemez.'
     },
     de: {
       'nav.how':"So funktioniert's",'nav.see':'Live ansehen','nav.pricing':'Preise','nav.faq':'FAQ','nav.cta':'Segue holen',
@@ -712,7 +806,22 @@
       'privacy.third_p':"Gumroad wickelt Zahlung und Checkout für deinen Kauf ab. Supabase hostet die kleine Datenbank, die sich deine Hardware-Kennung und den zugehörigen Lizenzschlüssel merkt. Keiner von beiden sieht deine Rekordbox-Bibliothek.",
       'footer.support':'Support',
       'footer.copy':"© 2026 Ahmet Canbaz. Segue ist ein unabhängiges Tool und steht in keiner Verbindung zu und wird nicht unterstützt von AlphaTheta / Rekordbox.",
-      'wheel.deck':'AUF DECK 1'
+      'wheel.deck':'AUF DECK 1',
+      'why.eyebrow':'Warum Segue','why.h2':'Gebaut für die DJ-Kabine, nicht fürs Schlafzimmer.',
+      'why.p':'Vorbereitungstools gehen davon aus, dass du dein Set schon kennst, bevor du auflegst. Echte Sets funktionieren nicht so — Segue auch nicht.',
+      'why.without_h':'Der alte Weg','why.with_h':'Mit Segue',
+      'why.without_li1':'Mitten im Übergang bei schwachem Licht durch ein 10.000-Track-Crate scrollen',
+      'why.without_li2':'Playlists vorbereiten, die zerfallen, sobald das Publikum anders reagiert',
+      'why.without_li3':'Camelot-Rad-Rechnung im Kopf, während der aktuelle Track ausläuft',
+      'why.without_li4':'Rätseln, ob dieser BPM-Sprung wirklich funktioniert',
+      'why.with_li1':'Deine ganze Bibliothek wird neu sortiert, sobald ein Track geladen wird — kein Scrollen nötig',
+      'why.with_li2':'Volle Freiheit, das Publikum zu lesen — keine Playlist, die du aufgeben müsstest',
+      'why.with_li3':'Tonart- und Energie-Kompatibilität wird live für dich berechnet',
+      'why.with_li4':'Jede Übereinstimmung ist schon danach sortiert, wie gut sie passt, bevor du sie brauchst',
+      'why.reliability_eyebrow':'Keine Überraschungen in der Kabine',
+      'why.reliability_li1':'Läuft nativ auf deinem Mac — keine Verzögerung, kein Plugin in Rekordbox, das dein Set zum Absturz bringen könnte.',
+      'why.reliability_li2':'Nur lesend, per Design — Segue beobachtet den Bildschirm von Rekordbox, greift aber nie auf deine Bibliothek oder Datenbank zu.',
+      'why.reliability_li3':'Bleibt sicher, wenn das WLAN im Venue ausfällt — Lizenz- und Testprüfungen sperren dich nie mitten im Set aus.'
     },
     es: {
       'nav.how':'Cómo funciona','nav.see':'Ver en acción','nav.pricing':'Precio','nav.faq':'Preguntas frecuentes','nav.cta':'Consigue Segue',
@@ -764,7 +873,22 @@
       'privacy.third_p':'Gumroad gestiona el pago y el checkout de tu compra. Supabase aloja la pequeña base de datos que recuerda tu identificador de hardware y a qué clave de licencia está vinculado. Ninguno de los dos ve tu biblioteca de Rekordbox.',
       'footer.support':'Soporte',
       'footer.copy':'© 2026 Ahmet Canbaz. Segue es una herramienta independiente y no está afiliada ni respaldada por AlphaTheta / Rekordbox.',
-      'wheel.deck':'EN EL DECK 1'
+      'wheel.deck':'EN EL DECK 1',
+      'why.eyebrow':'Por qué Segue','why.h2':'Hecho para la cabina, no para el dormitorio.',
+      'why.p':'Las herramientas de preparación asumen que ya sabes qué vas a pinchar antes de hacerlo. Los sets reales no funcionan así — y Segue tampoco.',
+      'why.without_h':'El método antiguo','why.with_h':'Con Segue',
+      'why.without_li1':'Desplazarte por un crate de 10.000 temas con poca luz, en plena transición',
+      'why.without_li2':'Preparar listas que se desmoronan en cuanto el público reacciona de otra forma',
+      'why.without_li3':'Calcular la rueda Camelot de memoria mientras se acaba el tema actual',
+      'why.without_li4':'Dudar si ese salto de BPM realmente va a funcionar',
+      'why.with_li1':'Toda tu biblioteca se reordena en el instante en que cargas un tema — nada que desplazar',
+      'why.with_li2':'Libertad total para leer al público — no hay lista que abandonar',
+      'why.with_li3':'La compatibilidad de tonalidad y energía se calcula por ti, en vivo',
+      'why.with_li4':'Cada coincidencia ya está ordenada según cómo va a encajar, antes de que la necesites',
+      'why.reliability_eyebrow':'Sin sorpresas en la cabina',
+      'why.reliability_li1':'Funciona de forma nativa en tu Mac — sin retardos, sin un plugin dentro de rekordbox que pueda colgar tu set.',
+      'why.reliability_li2':'De solo lectura por diseño — Segue observa la pantalla de rekordbox, pero nunca toca tu biblioteca ni tu base de datos.',
+      'why.reliability_li3':'Falla de forma segura si se cae el wifi del local — las verificaciones de licencia y prueba nunca te bloquean en pleno set.'
     },
     fr: {
       'nav.how':'Comment ça marche','nav.see':'Voir en action','nav.pricing':'Tarif','nav.faq':'FAQ','nav.cta':'Obtenir Segue',
@@ -816,7 +940,22 @@
       'privacy.third_p':"Gumroad gère le paiement et le passage en caisse de votre achat. Supabase héberge la petite base de données qui retient votre identifiant matériel et la clé de licence à laquelle il est associé. Ni l'un ni l'autre ne voit votre bibliothèque Rekordbox.",
       'footer.support':'Support',
       'footer.copy':"© 2026 Ahmet Canbaz. Segue est un outil indépendant, non affilié à AlphaTheta / Rekordbox et non approuvé par eux.",
-      'wheel.deck':'SUR LE DECK 1'
+      'wheel.deck':'SUR LE DECK 1',
+      'why.eyebrow':'Pourquoi Segue','why.h2':'Conçu pour la cabine, pas pour la chambre.',
+      'why.p':'Les outils de préparation supposent que vous connaissez déjà votre set avant de le jouer. Les vrais sets ne fonctionnent pas ainsi — Segue non plus.',
+      'why.without_h':"L'ancienne méthode",'why.with_h':'Avec Segue',
+      'why.without_li1':'Faire défiler un crate de 10 000 morceaux dans le noir, en pleine transition',
+      'why.without_li2':'Préparer des playlists qui s’effondrent dès que le public réagit autrement',
+      'why.without_li3':'Calculer la roue Camelot de tête pendant que le morceau actuel se termine',
+      'why.without_li4':'Douter si ce saut de BPM va vraiment passer',
+      'why.with_li1':'Toute votre bibliothèque est reclassée dès qu’un morceau est chargé — rien à faire défiler',
+      'why.with_li2':'Liberté totale de lire le public — aucune playlist à abandonner',
+      'why.with_li3':"La compatibilité de tonalité et d'énergie est calculée pour vous, en direct",
+      'why.with_li4':'Chaque correspondance est déjà triée selon sa pertinence, avant même que vous en ayez besoin',
+      'why.reliability_eyebrow':'Aucune surprise en cabine',
+      'why.reliability_li1':'Tourne nativement sur votre Mac — aucun ralentissement, aucun plugin dans rekordbox susceptible de faire planter votre set.',
+      'why.reliability_li2':"Lecture seule par conception — Segue observe l'écran de rekordbox, mais ne touche jamais à votre bibliothèque ni à votre base de données.",
+      'why.reliability_li3':'Reste fiable même si le wifi de la salle tombe — les vérifications de licence et d’essai ne vous bloquent jamais en plein set.'
     },
     it: {
       'nav.how':'Come funziona','nav.see':'Guardalo in azione','nav.pricing':'Prezzo','nav.faq':'FAQ','nav.cta':'Ottieni Segue',
@@ -868,7 +1007,22 @@
       'privacy.third_p':"Gumroad gestisce il pagamento e il checkout del tuo acquisto. Supabase ospita il piccolo database che ricorda il tuo identificativo hardware e a quale chiave di licenza è associato. Nessuno dei due vede la tua libreria Rekordbox.",
       'footer.support':'Supporto',
       'footer.copy':"© 2026 Ahmet Canbaz. Segue è uno strumento indipendente e non è affiliato né approvato da AlphaTheta / Rekordbox.",
-      'wheel.deck':'SUL DECK 1'
+      'wheel.deck':'SUL DECK 1',
+      'why.eyebrow':'Perché Segue','why.h2':'Pensato per la cabina, non per la cameretta.',
+      'why.p':'Gli strumenti di preparazione presumono che tu sappia già cosa suonerai prima di iniziare. I set veri non funzionano così — e nemmeno Segue.',
+      'why.without_h':'Il vecchio metodo','why.with_h':'Con Segue',
+      'why.without_li1':'Scorrere un crate da 10.000 brani al buio, in piena transizione',
+      'why.without_li2':'Preparare scalette che crollano appena il pubblico reagisce diversamente',
+      'why.without_li3':'Fare i calcoli della ruota Camelot a mente mentre il brano attuale sta finendo',
+      'why.without_li4':'Chiedersi se quel salto di BPM funzionerà davvero',
+      'why.with_li1':'Tutta la tua libreria viene riordinata nell’istante in cui carichi un brano — niente da scorrere',
+      'why.with_li2':'Libertà totale di leggere il pubblico — nessuna scaletta da abbandonare',
+      'why.with_li3':'La compatibilità di tonalità ed energia viene calcolata per te, dal vivo',
+      'why.with_li4':'Ogni abbinamento è già ordinato in base a quanto funzionerà, prima ancora che ti serva',
+      'why.reliability_eyebrow':'Nessuna sorpresa in cabina',
+      'why.reliability_li1':'Gira in modo nativo sul tuo Mac — nessun ritardo, nessun plugin dentro rekordbox che possa far crashare il tuo set.',
+      'why.reliability_li2':'Di sola lettura per progettazione — Segue osserva lo schermo di rekordbox, ma non tocca mai la tua libreria né il database.',
+      'why.reliability_li3':'Resta sicuro anche se il wifi del locale cade — i controlli di licenza e prova non ti bloccano mai a metà set.'
     },
     pt: {
       'nav.how':'Como funciona','nav.see':'Ver em ação','nav.pricing':'Preço','nav.faq':'Perguntas frequentes','nav.cta':'Obter o Segue',
@@ -920,7 +1074,22 @@
       'privacy.third_p':'O Gumroad cuida do pagamento e do checkout da sua compra. O Supabase hospeda o pequeno banco de dados que lembra seu identificador de hardware e a qual chave de licença ele está vinculado. Nenhum dos dois vê sua biblioteca do Rekordbox.',
       'footer.support':'Suporte',
       'footer.copy':'© 2026 Ahmet Canbaz. O Segue é uma ferramenta independente e não é afiliado nem endossado pela AlphaTheta / Rekordbox.',
-      'wheel.deck':'NO DECK 1'
+      'wheel.deck':'NO DECK 1',
+      'why.eyebrow':'Por que o Segue','why.h2':'Feito para a cabine, não para o quarto.',
+      'why.p':'As ferramentas de preparação presumem que você já sabe o que vai tocar antes de tocar. Sets de verdade não funcionam assim — e o Segue também não.',
+      'why.without_h':'O jeito antigo','why.with_h':'Com o Segue',
+      'why.without_li1':'Rolar um crate de 10.000 faixas no escuro, em plena transição',
+      'why.without_li2':'Preparar playlists que desmoronam assim que a pista reage de outro jeito',
+      'why.without_li3':'Fazer as contas da roda Camelot de cabeça enquanto a faixa atual está acabando',
+      'why.without_li4':'Ficar em dúvida se aquele salto de BPM realmente vai funcionar',
+      'why.with_li1':'Sua biblioteca inteira é reordenada no instante em que uma faixa é carregada — nada para rolar',
+      'why.with_li2':'Liberdade total para ler a pista — não há playlist para abandonar',
+      'why.with_li3':'A compatibilidade de tonalidade e energia é calculada para você, ao vivo',
+      'why.with_li4':'Cada correspondência já está ordenada pelo quanto vai funcionar, antes mesmo de você precisar',
+      'why.reliability_eyebrow':'Sem surpresas na cabine',
+      'why.reliability_li1':'Roda nativamente no seu Mac — sem atraso, sem plugin dentro do rekordbox que possa travar seu set.',
+      'why.reliability_li2':'Somente leitura por projeto — o Segue observa a tela do rekordbox, mas nunca toca na sua biblioteca ou banco de dados.',
+      'why.reliability_li3':'Falha de forma segura se o wifi do local cair — as verificações de licença e teste nunca bloqueiam você no meio do set.'
     },
     ru: {
       'nav.how':'Как это работает','nav.see':'Посмотреть','nav.pricing':'Цена','nav.faq':'Вопросы','nav.cta':'Получить Segue',
@@ -972,7 +1141,22 @@
       'privacy.third_p':'Gumroad обрабатывает оплату и оформление вашей покупки. Supabase хранит небольшую базу данных, которая запоминает идентификатор вашего оборудования и то, с каким лицензионным ключом он связан. Ни тот, ни другой сервис не видит вашу библиотеку Rekordbox.',
       'footer.support':'Поддержка',
       'footer.copy':'© 2026 Ahmet Canbaz. Segue — независимый инструмент, не связанный с AlphaTheta / Rekordbox и не одобренный ими.',
-      'wheel.deck':'НА ДЕКЕ 1'
+      'wheel.deck':'НА ДЕКЕ 1',
+      'why.eyebrow':'Почему Segue','why.h2':'Создан для диджейской кабины, а не для спальни.',
+      'why.p':'Инструменты подготовки предполагают, что вы уже знаете свой сет до того, как начнёте играть. Настоящие сеты так не работают — и Segue тоже.',
+      'why.without_h':'Старый способ','why.with_h':'С Segue',
+      'why.without_li1':'Листать библиотеку из 10 000 треков в полумраке прямо во время перехода',
+      'why.without_li2':'Готовить плейлисты, которые рассыпаются, как только публика реагирует иначе',
+      'why.without_li3':'Считать совместимость по кругу Camelot в уме, пока текущий трек подходит к концу',
+      'why.without_li4':'Гадать, действительно ли сработает этот скачок по темпу',
+      'why.with_li1':'Вся библиотека мгновенно переранжируется при загрузке трека — листать нечего',
+      'why.with_li2':'Полная свобода чувствовать публику — нет плейлиста, который пришлось бы бросить',
+      'why.with_li3':'Совместимость тональности и энергии рассчитывается за вас, в реальном времени',
+      'why.with_li4':'Каждый вариант уже отсортирован по тому, насколько удачно он сработает — заранее',
+      'why.reliability_eyebrow':'Никаких сюрпризов в кабине',
+      'why.reliability_li1':'Работает нативно на вашем Mac — без задержек, без плагина внутри rekordbox, который мог бы обрушить ваш сет.',
+      'why.reliability_li2':'Только чтение — по своей архитектуре: Segue наблюдает за экраном rekordbox, но никогда не трогает вашу библиотеку или базу данных.',
+      'why.reliability_li3':'Безопасно ведёт себя даже при обрыве wifi на площадке — проверки лицензии и пробного периода никогда не заблокируют вас посреди сета.'
     },
     ja: {
       'nav.how':'仕組み','nav.see':'デモを見る','nav.pricing':'価格','nav.faq':'よくある質問','nav.cta':'Segueを入手',
@@ -1024,7 +1208,22 @@
       'privacy.third_p':'購入時の決済とチェックアウトはGumroadが処理します。ハードウェア識別子と、それに紐づくライセンスキーを記憶する小さなデータベースはSupabaseがホストしています。どちらもあなたのRekordboxライブラリを見ることはありません。',
       'footer.support':'サポート',
       'footer.copy':'© 2026 Ahmet Canbaz. Segueは独立したツールであり、AlphaTheta / Rekordboxとの提携や承認は受けていません。',
-      'wheel.deck':'デッキ1'
+      'wheel.deck':'デッキ1',
+      'why.eyebrow':'Segueが選ばれる理由','why.h2':'自宅の練習用ではなく、本番のDJブースのために。',
+      'why.p':'事前準備ツールは、プレイする前からセット内容が決まっていることを前提にしています。しかし本当のセットはそうはいきません — Segueも同じ考え方です。',
+      'why.without_h':'これまでのやり方','why.with_h':'Segueなら',
+      'why.without_li1':'切り替えの最中に、暗い中で1万曲のクレートをスクロールする',
+      'why.without_li2':'客の反応が変わった瞬間に崩れてしまう固定プレイリストを事前に作る',
+      'why.without_li3':'現在の曲が終わりかけている間に、頭の中でCamelotホイールを計算する',
+      'why.without_li4':'そのBPMジャンプが本当にうまくいくか、賭けに出る',
+      'why.with_li1':'曲がロードされた瞬間にライブラリ全体が再ランク付けされる — スクロール不要',
+      'why.with_li2':'フロアの空気を読む自由が完全に手に入る — 崩れるプレイリストはもう存在しない',
+      'why.with_li3':'キーとエナジーの互換性はリアルタイムで自動計算される',
+      'why.with_li4':'必要になる前から、どの曲がどれだけハマるかがすでに並べられている',
+      'why.reliability_eyebrow':'ブースでの予期せぬトラブルなし',
+      'why.reliability_li1':'Mac上でネイティブに動作 — 遅延なし、セットをクラッシュさせかねないrekordbox内プラグインも不要です。',
+      'why.reliability_li2':'設計上、読み取り専用 — Segueはrekordboxの画面を監視するだけで、あなたのライブラリやデータベースには一切触れません。',
+      'why.reliability_li3':'会場のWi-Fiが落ちても安全に動作 — ライセンスやトライアルの確認がセットの最中にあなたをロックアウトすることはありません。'
     },
     zh: {
       'nav.how':'工作原理','nav.see':'查看演示','nav.pricing':'价格','nav.faq':'常见问题','nav.cta':'获取 Segue',
@@ -1076,7 +1275,22 @@
       'privacy.third_p':'Gumroad 负责处理你购买时的支付与结账流程。Supabase 托管着一个小型数据库，用于记录你的硬件标识符及其绑定的授权密钥。这两者都无法看到你的 Rekordbox 曲库。',
       'footer.support':'支持',
       'footer.copy':'© 2026 Ahmet Canbaz。Segue 是一款独立工具，与 AlphaTheta / Rekordbox 没有任何关联，也未获得其认可。',
-      'wheel.deck':'DECK 1 上'
+      'wheel.deck':'DECK 1 上',
+      'why.eyebrow':'为什么选择 Segue','why.h2':'为 DJ 台而生，而非练习房。',
+      'why.p':'准备类工具假设你在开始表演前就已经确定好了整场曲目。真正的现场从来不是这样运作的——Segue 也不是。',
+      'why.without_h':'传统方式','why.with_h':'使用 Segue',
+      'why.without_li1':'在切歌的关键时刻，昏暗中翻找一万首曲目的曲库',
+      'why.without_li2':'提前准备好的播放列表，一旦现场氛围变化就彻底失效',
+      'why.without_li3':'在当前曲目即将结束时，凭记忆心算 Camelot 音轮兼容性',
+      'why.without_li4':'赌一把那个 BPM 跳变到底能不能顺利衔接',
+      'why.with_li1':'曲目一加载，整个曲库立即重新排序——无需翻找',
+      'why.with_li2':'完全自由地读懂现场氛围——没有需要放弃的播放列表',
+      'why.with_li3':'调性与能量兼容度由系统实时为你计算',
+      'why.with_li4':'在你需要之前，每个候选曲目就已按契合度排好序',
+      'why.reliability_eyebrow':'DJ 台上不会有意外',
+      'why.reliability_li1':'在你的 Mac 上原生运行——没有延迟，也没有可能让你的现场崩溃的 rekordbox 内置插件。',
+      'why.reliability_li2':'设计上只读——Segue 只监控 rekordbox 的屏幕显示，绝不会触碰你的曲库或数据库。',
+      'why.reliability_li3':'即使场地 Wi-Fi 中断也能安全运行——授权与试用检测绝不会在演出中途把你锁在外面。'
     }
   };
   var HTML_KEYS = {
