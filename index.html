@@ -240,6 +240,16 @@
   .price-right{border-left:1px solid var(--border); padding-left:40px; display:flex; flex-direction:column; align-items:flex-start; gap:16px;}
   .price-tag{font-family:var(--font-mono); font-size:13px; color:var(--text-faint);}
   .price-tag b{font-family:var(--font-display); font-size:28px; color:var(--text); display:block; margin-top:4px; font-weight:700;}
+  .price-tag .price-was{font-size:18px; font-weight:600; color:var(--text-faint); text-decoration:line-through; margin-right:10px;}
+
+  .sale-banner{
+    display:inline-flex; align-items:center; gap:10px;
+    font-family:var(--font-mono); font-size:12.5px; font-weight:600; color:var(--text);
+    background:color-mix(in srgb, var(--grad-3) 14%, transparent);
+    border:1px solid color-mix(in srgb, var(--grad-3) 40%, transparent);
+    padding:9px 16px; border-radius:20px; margin-bottom:28px;
+  }
+  .sale-banner .sale-dot{width:6px; height:6px; border-radius:50%; background:var(--gradient); flex:none;}
 
   @media (max-width: 760px){
     .price-card{grid-template-columns:1fr;}
@@ -424,6 +434,8 @@
         <h2 data-i18n="pricing.h2">One license. One Mac. Yours to keep.</h2>
       </div>
 
+      <div class="sale-banner"><span class="sale-dot"></span><span data-i18n="pricing.sale_banner">Launch price — $9.99 instead of $24, for a limited time.</span></div>
+
       <div class="price-card">
         <div class="price-left">
           <div class="kicker" data-i18n="pricing.kicker">No subscription</div>
@@ -436,7 +448,7 @@
           </ul>
         </div>
         <div class="price-right">
-          <div class="price-tag"><span data-i18n="pricing.tag">One-time purchase</span><b data-i18n="pricing.tag_b">Get Segue</b></div>
+          <div class="price-tag"><span data-i18n="pricing.tag">One-time purchase</span><b><span class="price-was">$24</span><span data-i18n="pricing.tag_b">$9.99</span></b></div>
           <a class="btn-primary" href="https://melodist06382.gumroad.com/l/fhwoz" target="_blank" rel="noopener">
             <span data-i18n="pricing.buy">Buy on Gumroad</span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -647,9 +659,10 @@
       'pricing.li1':'7-day free trial, no card required',
       'pricing.li2':'Locked to one Mac — deactivate anytime to move it to a new one',
       'pricing.li3':'Reads a standard Rekordbox collection export, nothing proprietary',
-      'pricing.li4':'macOS 13 (Ventura) or later, Apple Silicon &amp; Intel',
-      'pricing.tag':'One-time purchase','pricing.tag_b':'$24','pricing.buy':'Buy on Gumroad',
+      'pricing.li4':'macOS 13 (Ventura) or later, Apple Silicon & Intel',
+      'pricing.tag':'One-time purchase','pricing.tag_b':'$9.99','pricing.buy':'Buy on Gumroad',
       'pricing.secure':'Secure checkout via Gumroad',
+      'pricing.sale_banner':'Launch price — $9.99 instead of $24, for a limited time.',
       'faq.eyebrow':'Fine print','faq.h2':'Before you install it',
       'faq.q1':'Does Segue need special permissions?',
       'faq.a1':"Yes — macOS Accessibility access, so it can read Rekordbox's on-screen deck state. Segue never modifies Rekordbox itself, and it can't see anything outside Rekordbox's window.",
@@ -715,8 +728,9 @@
       'pricing.li2':'Tek bir Mac’e kilitli — istediğin zaman devre dışı bırakıp yenisine taşı',
       'pricing.li3':'Standart bir Rekordbox koleksiyon dışa aktarımını okur, özel bir format değil',
       'pricing.li4':'macOS 13 (Ventura) veya üzeri, Apple Silicon ve Intel',
-      'pricing.tag':'Tek seferlik satın alma','pricing.tag_b':'$24','pricing.buy':"Gumroad'da Satın Al",
+      'pricing.tag':'Tek seferlik satın alma','pricing.tag_b':'$9.99','pricing.buy':"Gumroad'da Satın Al",
       'pricing.secure':'Gumroad üzerinden güvenli ödeme',
+      'pricing.sale_banner':'Lansman fiyatı — $24 yerine $9.99, sınırlı süreliğine.',
       'faq.eyebrow':'İnce ayrıntılar','faq.h2':'Kurmadan önce',
       'faq.q1':'Segue özel izinler gerektiriyor mu?',
       'faq.a1':"Evet — macOS Erişilebilirlik (Accessibility) izni, Rekordbox'un ekran üzerindeki deck durumunu okuyabilmesi için. Segue Rekordbox'un kendisini asla değiştirmez ve Rekordbox penceresi dışında hiçbir şey göremez.",
@@ -781,9 +795,10 @@
       'pricing.li1':'7 Tage kostenlos testen, keine Kreditkarte nötig',
       'pricing.li2':'An einen Mac gebunden — jederzeit deaktivierbar, um auf einen neuen umzuziehen',
       'pricing.li3':'Liest einen Standard-Rekordbox-Sammlungsexport, kein proprietäres Format',
-      'pricing.li4':'macOS 13 (Ventura) oder neuer, Apple Silicon &amp; Intel',
-      'pricing.tag':'Einmalzahlung','pricing.tag_b':'$24','pricing.buy':'Bei Gumroad kaufen',
+      'pricing.li4':'macOS 13 (Ventura) oder neuer, Apple Silicon & Intel',
+      'pricing.tag':'Einmalzahlung','pricing.tag_b':'$9.99','pricing.buy':'Bei Gumroad kaufen',
       'pricing.secure':'Sicherer Checkout über Gumroad',
+      'pricing.sale_banner':'Launch-Preis — $9.99 statt $24, nur für kurze Zeit.',
       'faq.eyebrow':'Kleingedrucktes','faq.h2':'Bevor du es installierst',
       'faq.q1':'Braucht Segue besondere Berechtigungen?',
       'faq.a1':'Ja — macOS-Bedienungshilfen-Zugriff (Accessibility), damit es den Deck-Status von Rekordbox auf dem Bildschirm lesen kann. Segue verändert Rekordbox selbst niemals und sieht nichts außerhalb des Rekordbox-Fensters.',
@@ -849,8 +864,9 @@
       'pricing.li2':'Vinculada a un Mac — desactívala cuando quieras para pasarla a otro',
       'pricing.li3':'Lee una exportación estándar de la colección de Rekordbox, nada propietario',
       'pricing.li4':'macOS 13 (Ventura) o posterior, Apple Silicon e Intel',
-      'pricing.tag':'Pago único','pricing.tag_b':'$24','pricing.buy':'Comprar en Gumroad',
+      'pricing.tag':'Pago único','pricing.tag_b':'$9.99','pricing.buy':'Comprar en Gumroad',
       'pricing.secure':'Pago seguro a través de Gumroad',
+      'pricing.sale_banner':'Precio de lanzamiento — $9.99 en lugar de $24, por tiempo limitado.',
       'faq.eyebrow':'Letra pequeña','faq.h2':'Antes de instalarlo',
       'faq.q1':'¿Segue necesita permisos especiales?',
       'faq.a1':'Sí — acceso a Accesibilidad de macOS, para poder leer el estado de los decks que muestra Rekordbox en pantalla. Segue nunca modifica Rekordbox y no puede ver nada fuera de su ventana.',
@@ -916,8 +932,9 @@
       'pricing.li2':'Verrouillé sur un seul Mac — désactivable à tout moment pour le transférer sur un nouveau',
       'pricing.li3':'Lit un export standard de collection Rekordbox, rien de propriétaire',
       'pricing.li4':'macOS 13 (Ventura) ou ultérieur, Apple Silicon et Intel',
-      'pricing.tag':'Achat unique','pricing.tag_b':'$24','pricing.buy':'Acheter sur Gumroad',
+      'pricing.tag':'Achat unique','pricing.tag_b':'$9.99','pricing.buy':'Acheter sur Gumroad',
       'pricing.secure':'Paiement sécurisé via Gumroad',
+      'pricing.sale_banner':'Prix de lancement — $9.99 au lieu de $24, pour une durée limitée.',
       'faq.eyebrow':'Les détails','faq.h2':"Avant de l'installer",
       'faq.q1':'Segue a-t-il besoin d’autorisations particulières ?',
       'faq.a1':"Oui — l'accès Accessibilité de macOS, pour pouvoir lire l'état des decks affiché par Rekordbox à l'écran. Segue ne modifie jamais Rekordbox lui-même et ne voit rien en dehors de sa fenêtre.",
@@ -983,8 +1000,9 @@
       'pricing.li2':'Vincolato a un Mac — disattivabile in qualsiasi momento per passare a uno nuovo',
       'pricing.li3':"Legge un'esportazione standard della collezione Rekordbox, nessun formato proprietario",
       'pricing.li4':'macOS 13 (Ventura) o successivo, Apple Silicon e Intel',
-      'pricing.tag':'Acquisto unico','pricing.tag_b':'$24','pricing.buy':'Acquista su Gumroad',
+      'pricing.tag':'Acquisto unico','pricing.tag_b':'$9.99','pricing.buy':'Acquista su Gumroad',
       'pricing.secure':'Pagamento sicuro tramite Gumroad',
+      'pricing.sale_banner':'Prezzo di lancio — $9.99 invece di $24, per un periodo limitato.',
       'faq.eyebrow':'In piccolo','faq.h2':'Prima di installarlo',
       'faq.q1':'Segue richiede permessi speciali?',
       'faq.a1':"Sì — l'accesso Accessibilità di macOS, per poter leggere lo stato dei deck mostrato a schermo da Rekordbox. Segue non modifica mai Rekordbox stesso e non può vedere nulla al di fuori della sua finestra.",
@@ -1050,8 +1068,9 @@
       'pricing.li2':'Vinculada a um Mac — desative quando quiser para transferir para outro',
       'pricing.li3':'Lê uma exportação padrão da coleção do Rekordbox, nada proprietário',
       'pricing.li4':'macOS 13 (Ventura) ou mais recente, Apple Silicon e Intel',
-      'pricing.tag':'Pagamento único','pricing.tag_b':'$24','pricing.buy':'Comprar no Gumroad',
+      'pricing.tag':'Pagamento único','pricing.tag_b':'$9.99','pricing.buy':'Comprar no Gumroad',
       'pricing.secure':'Checkout seguro via Gumroad',
+      'pricing.sale_banner':'Preço de lançamento — $9.99 em vez de $24, por tempo limitado.',
       'faq.eyebrow':'Letras miúdas','faq.h2':'Antes de instalar',
       'faq.q1':'O Segue precisa de permissões especiais?',
       'faq.a1':'Sim — acesso de Acessibilidade do macOS, para poder ler o estado dos decks exibido na tela pelo Rekordbox. O Segue nunca modifica o Rekordbox em si e não consegue ver nada fora da janela dele.',
@@ -1117,8 +1136,9 @@
       'pricing.li2':'Привязана к одному Mac — можно деактивировать в любой момент и перенести на новый',
       'pricing.li3':'Читает стандартный экспорт коллекции Rekordbox, никакого проприетарного формата',
       'pricing.li4':'macOS 13 (Ventura) или новее, Apple Silicon и Intel',
-      'pricing.tag':'Разовая покупка','pricing.tag_b':'$24','pricing.buy':'Купить на Gumroad',
+      'pricing.tag':'Разовая покупка','pricing.tag_b':'$9.99','pricing.buy':'Купить на Gumroad',
       'pricing.secure':'Безопасная оплата через Gumroad',
+      'pricing.sale_banner':'Стартовая цена — $9.99 вместо $24, ограниченное время.',
       'faq.eyebrow':'Важные детали','faq.h2':'Перед установкой',
       'faq.q1':'Нужны ли Segue особые разрешения?',
       'faq.a1':'Да — доступ к функциям специальных возможностей macOS (Accessibility), чтобы считывать состояние дек с экрана Rekordbox. Segue никогда не изменяет сам Rekordbox и не видит ничего за пределами его окна.',
@@ -1184,8 +1204,9 @@
       'pricing.li2':'Mac 1台にロック — いつでも無効化して新しい端末へ移行可能',
       'pricing.li3':'標準のRekordboxコレクションエクスポートを読み取るだけ、独自形式なし',
       'pricing.li4':'macOS 13 (Ventura) 以降、Apple SiliconとIntelの両方に対応',
-      'pricing.tag':'買い切り','pricing.tag_b':'$24','pricing.buy':'Gumroadで購入',
+      'pricing.tag':'買い切り','pricing.tag_b':'$9.99','pricing.buy':'Gumroadで購入',
       'pricing.secure':'Gumroadによる安全な決済',
+      'pricing.sale_banner':'期間限定ローンチ価格 — $9.99（通常価格 $24）。',
       'faq.eyebrow':'利用にあたって','faq.h2':'インストール前に',
       'faq.q1':'Segueには特別な権限が必要ですか?',
       'faq.a1':'はい — RekordboxのデッキのON画面状態を読み取るため、macOSのアクセシビリティ権限が必要です。SegueがRekordbox自体を変更することは一切なく、Rekordboxのウィンドウ外にあるものは見えません。',
@@ -1251,8 +1272,9 @@
       'pricing.li2':'绑定单台 Mac——可随时停用，转移到新设备',
       'pricing.li3':'读取标准的 Rekordbox 曲库导出文件，非专有格式',
       'pricing.li4':'macOS 13（Ventura）或更新版本，支持 Apple Silicon 与 Intel',
-      'pricing.tag':'一次性购买','pricing.tag_b':'$24','pricing.buy':'前往 Gumroad 购买',
+      'pricing.tag':'一次性购买','pricing.tag_b':'$9.99','pricing.buy':'前往 Gumroad 购买',
       'pricing.secure':'通过 Gumroad 安全结账',
+      'pricing.sale_banner':'限时上线优惠 — 现价 $9.99（原价 $24）。',
       'faq.eyebrow':'细则说明','faq.h2':'安装前须知',
       'faq.q1':'Segue 需要特殊权限吗？',
       'faq.a1':'需要——它需要 macOS 的"辅助功能"（Accessibility）权限，才能读取 Rekordbox 屏幕上显示的 deck 状态。Segue 绝不会修改 Rekordbox 本身，也看不到其窗口之外的任何内容。',
