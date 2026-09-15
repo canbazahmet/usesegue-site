@@ -60,8 +60,9 @@ header.site{
   backdrop-filter:blur(10px);
 }
 .nav{display:flex; align-items:center; justify-content:space-between; gap:20px; padding:16px 28px; max-width:1060px; margin:0 auto;}
-.brand{display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:700; font-size:18px;}
+.brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
 .brand img{width:30px; height:30px; display:block;}
+.brand:hover img{opacity:.85;}
 .nav-links{display:flex; align-items:center; gap:26px; font-size:14px; color:var(--text-muted); margin-left:auto;}
 .nav-links a{text-decoration:none;}
 .nav-links a:hover{color:var(--text);}
@@ -253,7 +254,6 @@ section.divide{border-top:1px solid var(--border);}
 /* ---------- footer ---------- */
 footer{border-top:1px solid var(--border); padding:36px 0 48px;}
 .foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;}
-.foot-row .brand{font-size:14px;}
 .foot-row .brand img{width:22px; height:22px;}
 .foot-links{display:flex; gap:22px; font-size:13px; color:var(--text-muted);}
 .foot-links a{text-decoration:none;}
