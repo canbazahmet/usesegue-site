@@ -1,7 +1,7 @@
 (function(){
   var I18N = {
     en: {
-      'nav.how':'How it works','nav.see':'See it','nav.pricing':'Pricing','nav.faq':'FAQ','nav.cta':'Get Segue','nav.buy':'Buy License',
+      'nav.how':'How it works','nav.see':'See it','nav.pricing':'Pricing','nav.faq':'FAQ','nav.cta':'Get Segue',
       'hero.eyebrow':'For Rekordbox DJs',
       'hero.sub':'Segue sits beside Rekordbox and watches your decks live. The moment a track loads, it scores your entire library by key, tempo, energy, and genre — so the next move is always one drag away.',
       'hero.cta_primary':'Get Segue','hero.cta_secondary':'See how it reads a mix →',
@@ -69,7 +69,7 @@
       'why.reliability_li3':'Fails safe if the venue wifi drops — license and trial checks never lock you out mid-set.'
     },
     tr: {
-      'nav.how':'Nasıl çalışır','nav.see':'Önizle','nav.pricing':'Fiyat','nav.faq':'SSS','nav.cta':"Segue'yi Al",'nav.buy':'Lisans Satın Al',
+      'nav.how':'Nasıl çalışır','nav.see':'Önizle','nav.pricing':'Fiyat','nav.faq':'SSS','nav.cta':"Segue'yi Al",
       'hero.eyebrow':"Rekordbox DJ'leri için",
       'hero.sub':"Segue, Rekordbox'un yanında oturur ve deck'lerini canlı izler. Bir parça yüklendiği anda, tüm kütüphaneni ton, tempo, enerji ve türe göre puanlar — böylece sıradaki hamle her zaman bir sürükle-bırak uzaklığında.",
       'hero.cta_primary':"Segue'yi Al",'hero.cta_secondary':"Bir mix'i nasıl okuduğunu gör →",
@@ -137,7 +137,7 @@
       'why.reliability_li3':"Mekanın wifi'ı kesilse bile güvenli tarafta kalır — lisans ve deneme kontrolleri seni set ortasında asla kilitlemez."
     },
     de: {
-      'nav.how':"So funktioniert's",'nav.see':'Live ansehen','nav.pricing':'Preise','nav.faq':'FAQ','nav.cta':'Segue holen','nav.buy':'Lizenz kaufen',
+      'nav.how':"So funktioniert's",'nav.see':'Live ansehen','nav.pricing':'Preise','nav.faq':'FAQ','nav.cta':'Segue holen',
       'hero.eyebrow':'Für Rekordbox-DJs',
       'hero.sub':'Segue sitzt neben Rekordbox und beobachtet deine Decks in Echtzeit. Sobald ein Track geladen wird, bewertet es deine gesamte Bibliothek nach Tonart, Tempo, Energie und Genre — der nächste Move ist so immer nur einen Drag entfernt.',
       'hero.cta_primary':'Segue holen','hero.cta_secondary':'So liest Segue einen Mix →',
@@ -205,7 +205,7 @@
       'why.reliability_li3':'Bleibt sicher, wenn das WLAN im Venue ausfällt — Lizenz- und Testprüfungen sperren dich nie mitten im Set aus.'
     },
     es: {
-      'nav.how':'Cómo funciona','nav.see':'Ver en acción','nav.pricing':'Precio','nav.faq':'Preguntas frecuentes','nav.cta':'Consigue Segue','nav.buy':'Comprar licencia',
+      'nav.how':'Cómo funciona','nav.see':'Ver en acción','nav.pricing':'Precio','nav.faq':'Preguntas frecuentes','nav.cta':'Consigue Segue',
       'hero.eyebrow':'Para DJs de Rekordbox',
       'hero.sub':'Segue se sienta junto a Rekordbox y observa tus decks en vivo. En el instante en que cargas un tema, puntúa toda tu biblioteca por tonalidad, tempo, energía y género — así el siguiente movimiento está siempre a un arrastre de distancia.',
       'hero.cta_primary':'Consigue Segue','hero.cta_secondary':'Mira cómo lee un mix →',
@@ -273,7 +273,7 @@
       'why.reliability_li3':'Falla de forma segura si se cae el wifi del local — las verificaciones de licencia y prueba nunca te bloquean en pleno set.'
     },
     fr: {
-      'nav.how':'Comment ça marche','nav.see':'Voir en action','nav.pricing':'Tarif','nav.faq':'FAQ','nav.cta':'Obtenir Segue','nav.buy':'Acheter une licence',
+      'nav.how':'Comment ça marche','nav.see':'Voir en action','nav.pricing':'Tarif','nav.faq':'FAQ','nav.cta':'Obtenir Segue',
       'hero.eyebrow':'Pour les DJs Rekordbox',
       'hero.sub':"Segue se place à côté de Rekordbox et observe vos decks en direct. Dès qu'un morceau est chargé, il note toute votre bibliothèque selon la tonalité, le tempo, l'énergie et le genre — le morceau suivant n'est ainsi jamais qu'à un glisser-déposer.",
       'hero.cta_primary':'Obtenir Segue','hero.cta_secondary':'Voir comment il lit un mix →',
@@ -341,7 +341,7 @@
       'why.reliability_li3':"Reste fiable même si le wifi de la salle tombe — les vérifications de licence et d'essai ne vous bloquent jamais en plein set."
     },
     it: {
-      'nav.how':'Come funziona','nav.see':'Guardalo in azione','nav.pricing':'Prezzo','nav.faq':'FAQ','nav.cta':'Ottieni Segue','nav.buy':'Acquista licenza',
+      'nav.how':'Come funziona','nav.see':'Guardalo in azione','nav.pricing':'Prezzo','nav.faq':'FAQ','nav.cta':'Ottieni Segue',
       'hero.eyebrow':'Per i DJ Rekordbox',
       'hero.sub':"Segue sta accanto a Rekordbox e osserva i tuoi deck in tempo reale. Nell'istante in cui carichi un brano, valuta tutta la tua libreria per tonalità, tempo, energia e genere — così la mossa successiva è sempre a un trascinamento di distanza.",
       'hero.cta_primary':'Ottieni Segue','hero.cta_secondary':'Guarda come legge un mix →',
@@ -409,7 +409,7 @@
       'why.reliability_li3':'Resta sicuro anche se il wifi del locale cade — i controlli di licenza e prova non ti bloccano mai a metà set.'
     },
     pt: {
-      'nav.how':'Como funciona','nav.see':'Ver em ação','nav.pricing':'Preço','nav.faq':'Perguntas frequentes','nav.cta':'Obter o Segue','nav.buy':'Comprar licença',
+      'nav.how':'Como funciona','nav.see':'Ver em ação','nav.pricing':'Preço','nav.faq':'Perguntas frequentes','nav.cta':'Obter o Segue',
       'hero.eyebrow':'Para DJs de Rekordbox',
       'hero.sub':'O Segue fica ao lado do Rekordbox e observa seus decks ao vivo. No instante em que uma faixa é carregada, ele avalia toda a sua biblioteca por tonalidade, andamento, energia e gênero — assim, o próximo movimento está sempre a um arrastar de distância.',
       'hero.cta_primary':'Obter o Segue','hero.cta_secondary':'Veja como ele lê um mix →',
@@ -477,7 +477,7 @@
       'why.reliability_li3':'Falha de forma segura se o wifi do local cair — as verificações de licença e teste nunca bloqueiam você no meio do set.'
     },
     ru: {
-      'nav.how':'Как это работает','nav.see':'Посмотреть','nav.pricing':'Цена','nav.faq':'Вопросы','nav.cta':'Получить Segue','nav.buy':'Купить лицензию',
+      'nav.how':'Как это работает','nav.see':'Посмотреть','nav.pricing':'Цена','nav.faq':'Вопросы','nav.cta':'Получить Segue',
       'hero.eyebrow':'Для диджеев Rekordbox',
       'hero.sub':'Segue работает рядом с Rekordbox и следит за вашими деками в реальном времени. В момент загрузки трека он оценивает всю вашу библиотеку по тональности, темпу, энергии и жанру — поэтому следующий трек всегда буквально в одном перетаскивании.',
       'hero.cta_primary':'Получить Segue','hero.cta_secondary':'Посмотреть, как он читает микс →',
@@ -545,7 +545,7 @@
       'why.reliability_li3':'Безопасно ведёт себя даже при обрыве wifi на площадке — проверки лицензии и пробного периода никогда не заблокируют вас посреди сета.'
     },
     ja: {
-      'nav.how':'仕組み','nav.see':'デモを見る','nav.pricing':'価格','nav.faq':'よくある質問','nav.cta':'Segueを入手','nav.buy':'ライセンスを購入',
+      'nav.how':'仕組み','nav.see':'デモを見る','nav.pricing':'価格','nav.faq':'よくある質問','nav.cta':'Segueを入手',
       'hero.eyebrow':'Rekordbox DJのために',
       'hero.sub':'SegueはRekordboxのそばに常駐し、デッキの状態をリアルタイムで監視します。トラックがロードされた瞬間、ライブラリ全体をキー、テンポ、エナジー、ジャンルでスコアリング — 次の一手は、いつもドラッグ一つ分の距離にあります。',
       'hero.cta_primary':'Segueを入手','hero.cta_secondary':'ミックスの読み取り方を見る →',
@@ -613,7 +613,7 @@
       'why.reliability_li3':'会場のWi-Fiが落ちても安全に動作 — ライセンスやトライアルの確認がセットの最中にあなたをロックアウトすることはありません。'
     },
     zh: {
-      'nav.how':'工作原理','nav.see':'查看演示','nav.pricing':'价格','nav.faq':'常见问题','nav.cta':'获取 Segue','nav.buy':'购买授权',
+      'nav.how':'工作原理','nav.see':'查看演示','nav.pricing':'价格','nav.faq':'常见问题','nav.cta':'获取 Segue',
       'hero.eyebrow':'为 Rekordbox DJ 打造',
       'hero.sub':'Segue 常驻在 Rekordbox 旁边，实时监控你的 deck。曲目一加载，它就会立即按调性、节奏、能量和曲风为你的整个曲库打分——下一首永远只需一次拖拽的距离。',
       'hero.cta_primary':'获取 Segue','hero.cta_secondary':'看看它如何读取一段混音 →',
